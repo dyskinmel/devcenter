@@ -1,0 +1,17 @@
+{
+  "name": "jekyll",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "fmt:md": "prettier --write '**/*.md'",
+    "fmt:yml": "prettier --write '**/*.yml'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^1.3.1",
+    "prettier": "^1.14.3",
+    "pretty-quick": "^1.8.0"
+  }
+}
