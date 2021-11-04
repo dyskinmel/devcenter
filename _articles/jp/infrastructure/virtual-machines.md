@@ -7,23 +7,23 @@ menu:
     weight: 3
 
 ---
-[bitrise.io](https://www.bitrise.io)では、ビルドを実行するためも`macOS`と`Linux`の2つの仮想マシンをご用意しています。各プラットフォームで複数のスタックのオプションから選択することができ、それぞれのスタックにプリインストールされたツールのバージョンのリストを確認できます。利用可能なスタック、スタック待機タイプ (Stack prepare type) については[こちら](/jp/infrastructure/available-stacks/)を参考にしてください。
+[bitrise.io](https://www.bitrise.io)では、ビルドを実行するための`macOS`と`Linux`の2つのプラットフォームの仮想マシンをご用意しています。各プラットフォームで複数のスタックのオプションから選択することができ、それぞれのスタックにプリインストールされたツールのバージョンのリストを確認できます。利用可能なスタック、スタック待機タイプ (Stack prepare type) については[こちら](/jp/infrastructure/available-stacks/)を参考にしてください。
 
 ビルドに使われるユーザーで**パスワードなしのsudo**が有効になると、ビルドや他の自動化に必要なツールを追加でインストールできるようになります。必要なツールがスタック上にプリインストールされていないときは、ご自身でインストールすることができます。[追加ツールのインストール](/jp/tips-and-tricks/install-additional-tools/)ガイドをご覧ください。
 
 ## セキュリティ
 
-全てのビルドはそれぞれ独立した仮想マシンで実行され、ビルドが終了すると"base box" と呼ばれる状態に仮想マシンは初期化されます。こうすることにより、他のユーザーによる変更や以前のビルドから**常にビルドは保護されます**。また、_ビルド間の状態が持続しないため_、ビルドワークフローを定義する”**stable environment（安定した環境）**”を使うこともできます。
+全てのビルドは独立した仮想マシン上で実行され、ビルドが終了すると"base box" と呼ばれる初期状態にそれぞれの仮想マシンはロールバックされます。こうすることで、他のユーザーによる変更や以前のビルドから**ビルドは常に保護されます**。また、_ビルド間の状態が持続しないため_、ビルドワークフローを定義する”**stable environment（安定した環境）**”を使うこともできます。
 
 ビルド/コード セキュリティにについての詳細は[コードセキュリティ](/jp/getting-started/code-security/)ガイドをご覧ください。
 
-### Network configuration for the virtual machines
+### 仮想マシンのネットワーク設定
 
-For most users, who host their repositories on cloud-based service providers, there is no need for any network configuration to be able to use Bitrise. All we need is permission to access the repository and for that, an SSH key is enough.
+クラウドベースのレポジトリを利用しているユーザーのほとんどはBitriseを使うためにレポジトリへのアクセス許可およびSSH設定のみで十分で、ネットワーク設定は必要ありません。
 
-However, your company security policy might not allow unknown and unauthorized IP addresses to communicate with the servers where your code is being stored - either on your own datacenter or in a private cloud. In that case, Bitrise won’t work unless the relevant IP addresses are added to your allow list.
+しかし、自社のデータセンターやプライベートクラウドをご利用の場合で、セキュリティーポリシーによる制約で認証されていないIPから、コードが保持されているサーバーへのアクセスを許可していない場合、アクセス許可リスト(以下、許可リスト)に適当なIPを設定いただかないとBitriseをご利用いただけません。
 
-### Adding build machine IPs to your allow list
+### 許可リストにビルドマシンのIPアドレスを追加する
 
 Our datacenters are behind a set of public static IP addresses, with the virtual machines having their own internal subnets behind these addresses. You need to add the public IP addresses that you can find in [External and internal IP addresses](/infrastructure/virtual-machines/#external-and-internal-ip-addresses "/infrastructure/virtual-machines/#external-and-internal-ip-addresses").
 
